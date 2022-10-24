@@ -10,6 +10,7 @@ const Habitos = () => {
     const { data } = useContext(UserContext)
     const [qtdHabitos, setQtdHabitos] = useState(undefined)
     const [adicinarHabitos, setAdicionarHabito] = useState(false)
+    const [habitos, setHabitos] = useState(undefined)
 
     function handleHabito(){
         if(!adicinarHabitos){
@@ -22,6 +23,7 @@ const Habitos = () => {
             .then(res => {
                 (setQtdHabitos(res.data.length))
                 console.log(res.data)
+                setHabitos(res.data)
             })
     }, [])
 
@@ -39,8 +41,16 @@ const Habitos = () => {
             {adicinarHabitos &&(
                 <CadastrarHabito setAdicionarHabito={setAdicionarHabito} token={data.token}/>
             )}
-            {qtdHabitos === 0 && (
+            {qtdHabitos === 0? (
                 <h2>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h2>
+            ): (
+                <>
+                {habitos.map((h)=>{
+                    return(
+                        <h1 key={h.id}> {h.name}</h1>
+                    )
+                })}
+                </>
             )}
 
         </ContainerHabitos>

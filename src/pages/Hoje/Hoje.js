@@ -18,7 +18,7 @@ const Hoje = () => {
     }, [])
     return (
         <div>
-            {/* <Header /> */}
+            <Header />
             <h1>{hoje}</h1>
         </div>
     )
