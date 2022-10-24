@@ -4,8 +4,6 @@ import styled from "styled-components"
 const ExibirDias = ({diaSemana, diasSelecionados, setDiasSelecionados}) =>{
     
     const [isDia, isSetDia] = useState(false)
-    // console.log(diaSemana.dia +": " + isDia)
-    // console.log(diasSelecionados)
 
     function selecionarDia (){
         if(!isDia){
@@ -19,7 +17,7 @@ const ExibirDias = ({diaSemana, diasSelecionados, setDiasSelecionados}) =>{
         isSetDia(!isDia)
     }
     return(
-        <BotaoDia onClick={selecionarDia}>
+        <BotaoDia onClick={selecionarDia} corBotao={isDia ?  "#CFCFCF" : "#ffffff"} corLetra={isDia ? "#ffffff" : "#CFCFCF"} >
             {diaSemana.tagName}
         </BotaoDia>
     )
@@ -27,6 +25,14 @@ const ExibirDias = ({diaSemana, diasSelecionados, setDiasSelecionados}) =>{
 
 export default ExibirDias
 const BotaoDia = styled.button`
-
+    width: 30px;
+    height: 30px;
+    background: ${props => props.corBotao};
+    color: ${props => props.corLetra};
+    border: solid 1px #D4D4D4;
+    border-radius: 3px;
+    margin-top: 10px;
+    margin-right: 5px;
+    margin-bottom: 10px;
 
 `

@@ -1,36 +1,52 @@
-import { useEffect, useState } from "react";
+import axios from "axios";
+import { useState } from "react";
 import styled from "styled-components";
 import { DiasDaSemana } from "./DiasdaSemana";
 import ExibirDias from "./ExibirDias";
 
-const CadastrarHabito = () => {
+const CadastrarHabito = ({ setAdicionarHabito, token }) => {
 
     const [habito, setHabito] = useState(undefined)
     const [diasSelecionados, setDiasSelecionados] = useState([])
-    console.log(diasSelecionados)
 
-    useEffect(() => {
+    function enviarHabito() {
+        const body = {
+            name: habito,
+            days: diasSelecionados
+        }
+        axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", body, { headers: { "Authorization": `Bearer ${token}` } })
+            .then(res => {
+                alert("cadastro realizado")
+                setAdicionarHabito(false)
+            })
+    }
 
-    }, [])
     return (
-        <CardHabito>
-            Cadastrar Habito
-            <input
-                type="text"
-                name="habito"
-                placeholder="nome do hábito"
-                onChange={(e) => setHabito(e.target.value)}
-            />
-            {DiasDaSemana.map((d, index) => {
-                return (
-                    <ExibirDias
-                        key={d.idDia}
-                        diaSemana={d}
-                        diasSelecionados={diasSelecionados}
-                        setDiasSelecionados={setDiasSelecionados} />
-                )
 
-            })}
+        <CardHabito>
+            <div>
+                <input
+                    type="text"
+                    name="habito"
+                    placeholder="nome do hábito"
+                    onChange={(e) => setHabito(e.target.value)}
+                />
+            </div>
+            <div>
+                {DiasDaSemana.map((d) => {
+                    return (
+                        <ExibirDias
+                            key={d.idDia}
+                            diaSemana={d}
+                            diasSelecionados={diasSelecionados}
+                            setDiasSelecionados={setDiasSelecionados} />
+                    )
+                })}
+            </div>
+            <div>
+                <button onClick={() => setAdicionarHabito(false)}>cancelar</button>
+                <button onClick={enviarHabito}>salvar</button>
+            </div>
         </CardHabito>
     )
 }
@@ -38,8 +54,9 @@ const CadastrarHabito = () => {
 export default CadastrarHabito;
 
 const CardHabito = styled.div`
+    width: 340px;
+    height: 180px;
+    background: #FFFFFF;
+    border-radius: 5px;
 
-`
-
-const BoxDia = styled.button`
 `

@@ -13,8 +13,8 @@ const Hoje = () => {
     
 
     useEffect(() => {
-        axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", { headers: { "Authorization": `Bearer ${data.token}` }, })
-            .then(res => (console.log(data)))
+        axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", { headers: { "Authorization": `Bearer ${data.token}` }})
+            .then(res => (console.log("hoje")))
     }, [])
     return (
         <div>

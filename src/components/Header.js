@@ -8,6 +8,7 @@ import { UserContext } from "../context/User"
 const Header = () =>{
 
     const {data} = useContext(UserContext)
+ 
     return(
         <ContainerHeder>
             <ContainerLogo src={trackit} alt="trackit" />
