@@ -22,7 +22,6 @@ const Habitos = () => {
         axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", { headers: { "Authorization": `Bearer ${data.token}` } })
             .then(res => {
                 (setQtdHabitos(res.data.length))
-                console.log(res.data)
                 setHabitos(res.data)
             })
     }, [])
