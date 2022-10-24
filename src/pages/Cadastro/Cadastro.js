@@ -21,7 +21,6 @@ const Cadastro = () => {
     }
     function handleSubmit(e) {
         e.preventDefault();
-        console.log(body);
         axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", body)
             .then(res=>{
                 alert("usuário cadastrado com sucesso");

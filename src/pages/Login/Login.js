@@ -1,24 +1,28 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/imagens/logo_trackit.png"
 import { ContainerIdentificacao } from "../../assets/styles/StyleIndendificacao";
+import { UserContext } from "../../context/User";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+    const {submit} = useContext(UserContext)
     const navigate = useNavigate();
 
-    const body = {
-        email: `${email}`,
-        password: `${senha}`
+    const login = { 
+        email: email,
+        password: senha
     }
+
     function handleSubmit(e) {
         e.preventDefault();
-        console.log(email);
-        console.log(senha);
-        axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", body)
-            .then(res=>alert("login realizado"))
+        axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", login)
+            .then(res=> {
+                const data = res.data
+                submit({data})
+                navigate('/habitos')})
             .catch(err => alert(err.response.data))
         // navigate("/cadastro");
     }
@@ -27,6 +31,7 @@ const Login = () => {
             <img src={logo} alt="logo" />
             <form onSubmit={handleSubmit}>
                 <input
+                    data-identifier="input-email"
                     type="email"
                     name="email"
                     placeholder="email"

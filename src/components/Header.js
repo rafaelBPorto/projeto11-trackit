@@ -1,11 +1,17 @@
 import styled from "styled-components"
 import trackit from "../assets/imagens/trackit.png"
+import React, { useContext } from "react"
+import { UserContext } from "../context/User"
+
+
 
 const Header = () =>{
+
+    const {data} = useContext(UserContext)
     return(
         <ContainerHeder>
             <ContainerLogo src={trackit} alt="trackit" />
-            <ContainerUser src={trackit} alt="" />
+            <ContainerUser src={data.image} alt="imagem do Usuario" />
         </ContainerHeder>
     )
 }
